@@ -1,4 +1,4 @@
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ionic-timepicker', 'ngCordova'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ionic-timepicker'])
 
     .run(function($ionicPlatform) {
       $ionicPlatform.ready(function() {
