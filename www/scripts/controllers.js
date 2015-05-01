@@ -62,10 +62,10 @@ angular.module('starter.controllers', [])
           quality: 75,
           targetWidth: 320,
           targetHeight: 320,
-          //destinationType: Camera.DestinationType.DATA_URL,
-          //sourceType: Camera.PictureSourceType.CAMERA,
-          //allowEdit: true,
-          //encodingType: Camera.EncodingType.JPEG,
+          destinationType: 0,
+          sourceType: 1,
+          allowEdit: true,
+          encodingType: 0,
           saveToPhotoAlbum: false
         }).then(function (imageURI) {
           console.log(imageURI);
