@@ -67,9 +67,9 @@ angular.module('starter.controllers', [])
           allowEdit: true,
           encodingType: 0,
           saveToPhotoAlbum: false
-        }).then(function (imageURI) {
-          console.log(imageURI);
-          $scope.lastPic = imageURI;
+        }).then(function (base64Image) {
+            var fb = new Firebase('https://storyapp.firebaseio.com/');
+            fb.set({base64Image);
         }, function (err) {
           console.err(err);
         });
