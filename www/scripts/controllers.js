@@ -1,6 +1,12 @@
 angular.module('starter.controllers', [])
 
     .controller('CreateCtrl', function ($scope, Stories, Camera) {
+      var fb = new Firebase('https://storyapp.firebaseio.com/');
+
+      fb.on('value', function(dataSnapshot) {
+        console.log('data snapshot', dataSnapshot);
+        $scope.lastPic = window.atob(dataSnapshot.val().image);
+      });
 
       $scope.storyIsActive = false;
 
@@ -57,19 +63,28 @@ angular.module('starter.controllers', [])
         });
       };
 
+      var onComplete = function(error) {
+        if (error) {
+          console.log('Upload failed');
+        } else {
+          console.log('Upload succeeded');
+        }
+      };
+
+      var cameraOptions = {
+        quality: 75,
+        targetWidth: 320,
+        targetHeight: 320,
+        destinationType: 0,
+        sourceType: 1,
+        allowEdit: true,
+        encodingType: 0,
+        saveToPhotoAlbum: false
+      };
+
       $scope.takePhoto = function () {
-        Camera.getPicture({
-          quality: 75,
-          targetWidth: 320,
-          targetHeight: 320,
-          destinationType: 0,
-          sourceType: 1,
-          allowEdit: true,
-          encodingType: 0,
-          saveToPhotoAlbum: false
-        }).then(function (base64Image) {
-            var fb = new Firebase('https://storyapp.firebaseio.com/');
-            fb.set({base64Image);
+        Camera.getPicture(cameraOptions).then(function (base64Image) {
+            fb.set({image: base64Image}, onComplete);
         }, function (err) {
           console.err(err);
         });
